@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Modal from "./Components/Modal/Modal";
+import List from "./Components/List/List";
+import classes from "./App.module.css";
+import Form from "./Components/Form/Form";
 function App() {
+  const [modalValue, setModalValue] = useState(true);
+  const showHide = (module) => {
+    setModalValue(module);
+    console.log(modalValue);
+  };
+
+  const [receivedInputs, setRecivedInputs] = useState([
+    {
+      name: "Rahe",
+      age: 25,
+    },
+  ]);
+  const receivingInputs = (inputs) => {
+    setRecivedInputs((prev) => {
+      return [inputs, ...prev];
+    });
+    console.log(receivedInputs);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.main}>
+      <Form module={showHide} inputs={receivingInputs}></Form>
+      <Modal mod={showHide} modal={modalValue}></Modal>
+      <List inputList={receivedInputs}></List>
     </div>
   );
 }
-
 export default App;

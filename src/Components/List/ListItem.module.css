@@ -1,0 +1,8 @@
+.listitem {
+  background: rgb(255, 56, 56);
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
