@@ -14,17 +14,23 @@ const Form = (props) => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    if (enteredText.trim().length === 0 || enteredAge.trim().length === 0) {
+    if (
+      enteredText.trim().length === 0 ||
+      enteredAge.trim().length === 0 ||
+      +enteredAge < 1
+    ) {
       setIsValid(false);
       props.module(isValid);
       console.log(isValid);
-    } else {
-      const allInputs = {
-        name: enteredText,
-        age: enteredAge,
-      };
-      props.inputs(allInputs);
+      return;
     }
+    const allInputs = {
+      name: enteredText,
+      age: enteredAge,
+    };
+    props.inputs(allInputs);
+    setEnteredText("");
+    setEnteredAge("");
   };
 
   return (
@@ -36,11 +42,11 @@ const Form = (props) => {
           }`}
         >
           <label>Username</label>
-          <input onChange={userHandler} type="text"></input>
+          <input value={enteredText} onChange={userHandler} type="text"></input>
         </div>
         <div className={classes["form-control"]}>
           <label>Age</label>
-          <input onChange={ageHandler} type="number"></input>
+          <input value={enteredAge} onChange={ageHandler} type="number"></input>
         </div>
         <div className={classes["form-control"]}>
           <Button type="submit">Add User</Button>

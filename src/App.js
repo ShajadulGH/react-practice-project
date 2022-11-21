@@ -11,14 +11,11 @@ function App() {
   };
 
   const [receivedInputs, setRecivedInputs] = useState([
-    {
-      name: "Rahe",
-      age: 25,
-    },
+    { id: "e1", name: "Rahe", age: 25 },
   ]);
   const receivingInputs = (inputs) => {
     setRecivedInputs((prev) => {
-      return [inputs, ...prev];
+      return [{ inputs, id: Math.random().toString() }, ...prev];
     });
     console.log(receivedInputs);
   };
