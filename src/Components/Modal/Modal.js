@@ -1,20 +1,21 @@
-import { useState } from "react";
 import classes from "./Modal.module.css";
-
+import Card from "../UI/Card";
+import Button from "../UI/Button";
 const Modal = (props) => {
-  const [isValid, setIsValid] = useState();
-  const clickHandler = () => {
-    console.log("working");
-
-    setIsValid(true);
-    props.mod(isValid);
-  };
   return (
-    <div className={props.modal ? classes.module : classes.module2}>
-      <p>The input Fields are empty!</p>
-      <div>
-        <button onClick={clickHandler}>OK</button>
-      </div>
+    <div className={classes.backdrop} onClick={props.okClicked}>
+      <Card className={classes.modal}>
+        <header className={classes.header}>
+          <h2>{props.title}</h2>
+        </header>
+        <div className={classes.content}>
+          <p>{props.msg}</p>
+        </div>
+        <footer className={classes.actions}>
+          {/* <button onClick={props.okClicked}>OK</button> */}
+          <Button onClick={props.okClicked}>Okay</Button>
+        </footer>
+      </Card>
     </div>
   );
 };
