@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import classes from "./Form.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
@@ -39,7 +39,7 @@ const Form = (props) => {
   };
 
   return (
-    <div>
+    <Fragment>
       {errorMsg && (
         <Modal
           title={errorMsg.title}
@@ -71,7 +71,7 @@ const Form = (props) => {
           </div>
         </form>
       </Card>
-    </div>
+    </Fragment>
   );
 };
 export default Form;
