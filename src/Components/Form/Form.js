@@ -1,20 +1,24 @@
-import { useState, Fragment } from "react";
+import { useRef, useState, Fragment } from "react";
 import classes from "./Form.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../Modal/Modal";
 const Form = (props) => {
+  const gotText = useRef();
+  const gotAge = useRef();
   const [errorMsg, setErrorMsg] = useState();
-  const [enteredText, setEnteredText] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
-  const userHandler = (e) => {
-    setEnteredText(e.target.value);
-  };
-  const ageHandler = (e) => {
-    setEnteredAge(e.target.value);
-  };
+  // const [enteredText, setEnteredText] = useState("");
+  // const [enteredAge, setEnteredAge] = useState("");
+  // const userHandler = (e) => {
+  //   setEnteredText(e.target.value);
+  // };
+  // const ageHandler = (e) => {
+  //   setEnteredAge(e.target.value);
+  // };
   const submitHandler = (e) => {
     e.preventDefault();
+    const enteredText = gotText.current.value;
+    const enteredAge = gotAge.current.value;
     if (enteredText.trim().length === 0 || enteredAge.trim().length === 0) {
       setErrorMsg({
         title: "Invalid Inputs!",
@@ -29,12 +33,14 @@ const Form = (props) => {
       return;
     }
     props.inputs(enteredText, enteredAge);
-    setEnteredText("");
-    setEnteredAge("");
+    gotText.current.value = "";
+    gotAge.current.value = "";
+
+    // setEnteredText("");
+    // setEnteredAge("");
     // setErrorMsg(null);
   };
   const okHandler = () => {
-    console.log("working");
     setErrorMsg(null);
   };
 
@@ -53,17 +59,19 @@ const Form = (props) => {
           <div className={classes["form-control"]}>
             <label>Username</label>
             <input
-              value={enteredText}
-              onChange={userHandler}
+              // value={enteredText}
+              // onChange={userHandler}
               type="text"
+              ref={gotText}
             ></input>
           </div>
           <div className={classes["form-control"]}>
             <label>Age</label>
             <input
-              value={enteredAge}
-              onChange={ageHandler}
+              // value={enteredAge}
+              // onChange={ageHandler}
               type="number"
+              ref={gotAge}
             ></input>
           </div>
           <div className={classes["form-control"]}>
