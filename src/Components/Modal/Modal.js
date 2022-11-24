@@ -1,7 +1,10 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import classes from "./Modal.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
-const Modal = (props) => {
+import { Fragment } from "react";
+const ModalPortal = (props) => {
   return (
     <div className={classes.backdrop} onClick={props.okClicked}>
       <Card className={classes.modal}>
@@ -17,6 +20,21 @@ const Modal = (props) => {
         </footer>
       </Card>
     </div>
+  );
+};
+
+const Modal = (props) => {
+  return (
+    <Fragment>
+      {ReactDOM.createPortal(
+        <ModalPortal
+          okClicked={props.okClicked}
+          title={props.title}
+          msg={props.msg}
+        />,
+        document.getElementById("modal-root")
+      )}
+    </Fragment>
   );
 };
 export default Modal;
